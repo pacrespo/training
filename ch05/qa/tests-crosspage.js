@@ -1,5 +1,4 @@
-var Browser = require('zombie'),
-	assert = require('chai').assert;
+var Browser = require('zombie');
 
 var browser;
 
@@ -15,8 +14,8 @@ suite('Cross-Page Tests', function(){
 		browser.visit(referrer, function(){
 			browser.clickLink('.requestGroupRate', function(){
 				var hidden = browser.field('referrer').value;
-				console.log('log hidden field %s', hidden);
-				assert(hidden === referrer);
+				browser.assert.success();
+				browser.assert.input('form input[name=referrer]', referrer);
 				done();
 			});
 		});
@@ -28,8 +27,8 @@ suite('Cross-Page Tests', function(){
 		browser.visit(referrer, function(){
 			browser.clickLink('.requestGroupRate', function(){
 				var hidden = browser.field('referrer').value;
-				console.log('log hidden field %s', hidden);
-				assert(hidden === referrer);
+				browser.assert.success();
+				browser.assert.input('form input[name=referrer]', referrer);
 				done();
 			});
 		});
@@ -38,7 +37,7 @@ suite('Cross-Page Tests', function(){
 	test('visiting the "request group rate" page dirctly should result ' +
 			'in an empty value for the referrer field', function(done){
 		browser.visit('http://localhost:3000/tours/request-group-rate', function(){
-			assert(browser.field('referrer').value === '');
+			browser.assert.input('form input[name=referrer]', '');
 			done();
 		});
 	});
