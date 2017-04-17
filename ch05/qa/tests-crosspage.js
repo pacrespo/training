@@ -14,7 +14,9 @@ suite('Cross-Page Tests', function(){
 		var referrer = 'http://localhost:3000/tours/hood-river';
 		browser.visit(referrer, function(){
 			browser.clickLink('.requestGroupRate', function(){
-				assert(browser.field('referrer').value === referrer);
+				var hidden = browser.field('referrer').value;
+				console.log('log hidden field %s', hidden);
+				assert(hidden === referrer);
 				done();
 			});
 		});
@@ -25,7 +27,9 @@ suite('Cross-Page Tests', function(){
 		var referrer = 'http://localhost:3000/tours/oregon-coast';
 		browser.visit(referrer, function(){
 			browser.clickLink('.requestGroupRate', function(){
-				assert(browser.field('referrer').value === referrer);
+				var hidden = browser.field('referrer').value;
+				console.log('log hidden field %s', hidden);
+				assert(hidden === referrer);
 				done();
 			});
 		});
