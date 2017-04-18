@@ -2,7 +2,8 @@ module.exports = function(grunt){
 
 	// load plugins
 	[
-		'grunt-cafe-mocha',
+		'grunt-express-server',
+		'grunt-mocha-test',
 		'grunt-contrib-jshint',
 		'grunt-exec',
 	].forEach(function(task){
@@ -11,7 +12,28 @@ module.exports = function(grunt){
 
 	// configure plugins
 	grunt.initConfig({
-		cafemocha: {
+		express: {
+			options: {
+			// Override defaults here
+			},
+			dev: {
+				options: {
+					script: 'meadowlark.js'
+				}
+			},
+			prod: {
+				options: {
+					script: 'meadowlark.js',
+					node_env: 'production'
+				}
+			},
+			test: {
+				options: {
+					script: 'meadowlark.js'
+				}
+			}
+		},
+		mochaTest: {
 			all: { src: 'qa/tests-*.js', options: { ui: 'tdd' }, }
 		},
 		jshint: {
@@ -24,5 +46,5 @@ module.exports = function(grunt){
 	});	
 
 	// register tasks
-	grunt.registerTask('default', ['cafemocha','jshint','exec']);
+	grunt.registerTask('default', ['express:dev','mochaTest','jshint','exec']);
 };
