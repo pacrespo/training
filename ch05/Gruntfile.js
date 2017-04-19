@@ -34,7 +34,14 @@ module.exports = function(grunt){
 			}
 		},
 		mochaTest: {
-			all: { src: 'qa/tests-*.js', options: { ui: 'tdd' }, }
+			all: { 
+				src: 'qa/tests-*.js',
+				options: {
+					ui: 'tdd',
+					timeout: '5000',
+					reporter: 'spec'
+				},
+			}
 		},
 		jshint: {
 			app: ['meadowlark.js', 'public/js/**/*.js', 'lib/**/*.js'],
