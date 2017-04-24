@@ -14,6 +14,7 @@ var handlebars = require('express-handlebars').create({
         }
     }
 });
+
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
@@ -58,6 +59,8 @@ function getWeatherData(){
 }
 
 // middleware to add weather data to context
+// please notice this match with all request
+// , meaning the wheatherContext will be populated even for those views where it is not requiered 
 app.use(function(req, res, next){
 	if(!res.locals.partials) res.locals.partials = {};
  	res.locals.partials.weatherContext = getWeatherData();
