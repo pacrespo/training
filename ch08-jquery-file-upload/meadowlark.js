@@ -4,6 +4,7 @@ var express = require('express'),
 	jqupload = require('jquery-file-upload-middleware');
 
 var app = express();
+var bodyParser = require('body-parser');
 
 // set up handlebars view engine
 var handlebars = require('express-handlebars').create({
@@ -22,7 +23,10 @@ app.set('view engine', 'handlebars');
 app.set('port', process.env.PORT || 3000);
 
 app.use(express.static(__dirname + '/public'));
-app.use(require('body-parser')());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // set 'showTests' context property if the querystring contains test=1
 app.use(function(req, res, next){
